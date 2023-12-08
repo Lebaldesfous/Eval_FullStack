@@ -1,5 +1,9 @@
 # Eval_FullStack
 
+### BEFORE USAGE :
+
+### Ajouter les  5 tags  dans la table TAG 
+
 #Questions : 
 
 1)
