@@ -37,4 +37,13 @@ export interface AddRestaurantDto {
     tags: TagDto[];
 }
 
+export interface AddEvaluationDto {
+    nom: string;
+    note: number;
+    commentaire: string;
+    dateCreation: Date;
+    dateModification: Date;
+
+}
+
 

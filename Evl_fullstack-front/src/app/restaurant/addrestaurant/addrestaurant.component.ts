@@ -3,7 +3,7 @@ import {RestaurantService} from "../restaurant.service";
 import {Subscription} from "rxjs";
 import {FormsModule, NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import {JsonPipe, NgForOf} from "@angular/common";
 import {AddRestaurantDto, RestaurantDto, TagDto} from "../restaurant-dto";
 
 @Component({
@@ -11,7 +11,8 @@ import {AddRestaurantDto, RestaurantDto, TagDto} from "../restaurant-dto";
   standalone: true,
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    JsonPipe
   ],
   templateUrl: './addrestaurant.component.html',
   styleUrl: './addrestaurant.component.css'
@@ -25,7 +26,16 @@ export class AddrestaurantComponent {
 
   }
 
-  public selected:number=-1;
+  public isChecked: boolean[] = [
+      false,
+    false,
+    false,
+    false,
+    false
+
+  ]
+
+
 
   public types: TagDto[] = []
   private subscriptions: Subscription[] = [];
@@ -45,23 +55,27 @@ export class AddrestaurantComponent {
     if (formAddRestaurant.valid) {
       this.restaurant.nom= formAddRestaurant.value.nom;
       this.restaurant.adresse= formAddRestaurant.value.adresse;
-      this.restaurant.tags.push(formAddRestaurant.value.tags);
+      //ajout des tags correspondant aux checkbox cochées
+        for(let i=0;i<this.isChecked.length;i++){
+            if(this.isChecked[i]){
+            this.restaurant.tags.push(this.types[i]);
+            }
+        }
 
-      console.log(formAddRestaurant);
-      console.log(this.selected);
 
-      /* this.subscriptions.push(this.restaurantService.addRestaurant(this.restaurant).subscribe({
+
+       this.subscriptions.push(this.restaurantService.addRestaurant(this.restaurant).subscribe({
          next: () => {
            this.router.navigate(["/restaurants"]);
          }
        }));
 
 
-   }*/
+   }
 
 
     }
-  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }

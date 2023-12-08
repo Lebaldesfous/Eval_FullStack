@@ -21,6 +21,25 @@ export class RestaurantDisplayComponent {
 
   @Input("restaurants") set restaurant(restaurants: RestaurantDto[]) {
     this.restaurants = restaurants;
+
+    //pour chaque restaurant, on calcule la moyenne des notes
+    for(let i=0;i<this.restaurants.length;i++){
+      let moyenne=0;
+      const evaluations=this.restaurants[i].evaluations;
+      if(evaluations!==undefined){
+        for(let j=0;j<evaluations.length;j++){
+          moyenne+=evaluations[j].note;
+        }
+        moyenne/=evaluations.length;
+        if(isNaN(moyenne)){
+          this.restaurants[i].moyenne=-1  ;
+        }else{
+          this.restaurants[i].moyenne=moyenne;
+        }
+
+      }
+
+    }
   }
 
 }

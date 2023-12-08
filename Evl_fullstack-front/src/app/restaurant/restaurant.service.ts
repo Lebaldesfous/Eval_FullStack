@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {RestaurantDto, TagDto} from "./restaurant-dto";
+import {AddEvaluationDto, AddRestaurantDto, EvaluationDto, RestaurantDto, TagDto} from "./restaurant-dto";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -20,7 +20,7 @@ export class RestaurantService {
     return this.httpclient.get<TagDto[]>('http://localhost:8080/tags')
   }
 
-  public addRestaurant(restaurant:RestaurantDto):Observable<RestaurantDto>{
+  public addRestaurant(restaurant:AddRestaurantDto):Observable<RestaurantDto>{
     return this.httpclient.post<RestaurantDto>('http://localhost:8080/restaurants',restaurant)
   }
 
@@ -30,5 +30,13 @@ export class RestaurantService {
 
     public supprimerEvaluation(id:number,idEvaluation:number):Observable<RestaurantDto>{
         return this.httpclient.delete<RestaurantDto>('http://localhost:8080/restaurants/'+id+'/evaluations/'+idEvaluation)
+    }
+
+    public addEvaluation(id:number,evaluation:AddEvaluationDto):Observable<EvaluationDto>{
+        return this.httpclient.post<EvaluationDto>('http://localhost:8080/restaurants/'+id+'/evaluations',evaluation)
+    }
+
+    public modifierRestaurant(id:number,restaurant:RestaurantDto):Observable<RestaurantDto>{
+        return this.httpclient.put<RestaurantDto>('http://localhost:8080/restaurants/'+id,restaurant)
     }
 }

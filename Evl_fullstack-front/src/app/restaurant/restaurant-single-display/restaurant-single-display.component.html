@@ -1,5 +1,31 @@
 <h1> {{restaurant.nom}} </h1>
 
+<button type="button"  [ngClass]="{active:!form}" (click)="form=true">Modifier Restaurant</button>
+
+<div [ngSwitch]="form"  >
+    <div *ngSwitchCase="true">
+        <form #formAddRestaurant="ngForm" (ngSubmit)="modifierRestaurant(formAddRestaurant)">
+
+            <label for="nom">Nom </label>
+            <input type="text" name="nom" [(ngModel)]="restaurant.nom" required maxlength="90">
+
+            <label for="adresse">Adresse </label>
+            <input type="text" name="adresse" [(ngModel)]="restaurant.adresse" required maxlength="255">
+
+            <div *ngFor="let type of types">
+                <input [(ngModel)]="isChecked[type.id]" type="checkbox" name="{{type.id}}" />
+                <label for="{{type.id}}">{{type.nom}} </label>
+            </div>
+
+
+            <button type="submit"  (click)="form=false">Ajouter</button>
+
+        </form>
+    </div>
+
+</div>
+
+
 <div>
     <h3> Adresse :</h3>
     <p> {{restaurant.adresse}} </p>
@@ -14,7 +40,7 @@
 
     <table>
         <tr>
-            <th>nom</th>
+            <th>Nom</th>
             <th>Commentaire</th>
             <th>Note</th>
             <th>Photos</th>
@@ -33,3 +59,19 @@
         </tr>
     </table>
 </div>
+
+<form #formAddEvalution="ngForm" (ngSubmit)="addEvaluation(formAddEvalution)">
+    <h3>Ajouter une évaluation</h3>
+    <div>
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" [(ngModel)]="evaluation.nom" required>
+
+        <label for="commentaire">Commentaire</label>
+        <input type="text" name="commentaire" [(ngModel)]="evaluation.commentaire" required>
+
+        <label for="note">Note</label>
+        <input type="number" name="note"  #note="ngModel" [(ngModel)]="evaluation.note" required >
+    </div>
+
+    <button type="submit">Ajouter</button>
+</form>
