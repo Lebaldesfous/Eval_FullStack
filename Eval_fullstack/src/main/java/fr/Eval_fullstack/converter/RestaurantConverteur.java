@@ -12,17 +12,37 @@ public class RestaurantConverteur {
    public static RestaurantDto entityRestaurantToDto(RestaurantEntity entityRestaurant){
 
        //return RestaurantDto.builder().id(entityRestaurant.getId()).build();
-        return RestaurantDto.builder().id(entityRestaurant.getId()).nom(entityRestaurant.getNom()).adresse(entityRestaurant.getAdresse()).moyenne(entityRestaurant.getMoyenne()).evaluations(EvaluationConverter.entityEvaluationsToDto(entityRestaurant.getEvaluations())).evaluationFinale(EvaluationFinaleConverter.entityEvaluationFinaleToDto(entityRestaurant.getEvaluationFinale())).build();
+        return RestaurantDto.builder()
+                .id(entityRestaurant.getId())
+                .nom(entityRestaurant.getNom())
+                .adresse(entityRestaurant.getAdresse())
+                .moyenne(entityRestaurant.getMoyenne())
+                .evaluations(EvaluationConverter.entityEvaluationsToDto(entityRestaurant.getEvaluations()))
+                .evaluationFinale(EvaluationFinaleConverter.entityEvaluationFinaleToDto(entityRestaurant.getEvaluationFinale()))
+                .tags(TagConverter.entityToDto(entityRestaurant.getTags()))
+                .build();
    }
 
    public static RestaurantEntity dtoRestaurantToEntity(RestaurantDto dtoRestaurant){
 
-       return RestaurantEntity.builder().id(dtoRestaurant.getId()).nom(dtoRestaurant.getNom()).adresse(dtoRestaurant.getAdresse()).moyenne(dtoRestaurant.getMoyenne()).evaluations(EvaluationConverter.dtoEvaluationsToEntity(dtoRestaurant.getEvaluations())).evaluationFinale(EvaluationFinaleConverter.dtoEvaluationFinaleToEntity(dtoRestaurant.getEvaluationFinale())).build();
+       return RestaurantEntity.builder()
+               .id(dtoRestaurant.getId())
+               .nom(dtoRestaurant.getNom())
+               .adresse(dtoRestaurant.getAdresse())
+               .moyenne(dtoRestaurant.getMoyenne())
+               .tags(TagConverter.dtoToEntity(dtoRestaurant.getTags()))
+               .evaluations(EvaluationConverter.dtoEvaluationsToEntity(dtoRestaurant.getEvaluations()))
+               .evaluationFinale(EvaluationFinaleConverter.dtoEvaluationFinaleToEntity(dtoRestaurant.getEvaluationFinale()))
+               .build();
    }
 
    public static RestaurantEntity addRestaurantDtoToEntity(AddRestaurantDto addRestaurantDto){
 
-       return RestaurantEntity.builder().nom(addRestaurantDto.getNom()).adresse(addRestaurantDto.getAdresse()).moyenne(0.0f).build();
+       return RestaurantEntity.builder()
+               .nom(addRestaurantDto.getNom())
+               .adresse(addRestaurantDto.getAdresse())
+               .moyenne(0.0f).tags(TagConverter.dtoToEntity(addRestaurantDto.getTags()))
+               .build();
    }
 
    public static List<RestaurantDto> entityRestaurantsToDto(List<RestaurantEntity> l) {
