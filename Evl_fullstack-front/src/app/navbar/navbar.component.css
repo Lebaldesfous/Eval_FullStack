@@ -1,0 +1,13 @@
+a.visited{
+  color:blue;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+
+}
+
+li {
+  margin: 0 10px;
+}
