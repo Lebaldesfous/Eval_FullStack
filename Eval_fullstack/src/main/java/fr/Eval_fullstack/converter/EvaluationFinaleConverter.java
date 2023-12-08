@@ -3,6 +3,7 @@ package fr.Eval_fullstack.converter;
 import fr.Eval_fullstack.dto.request.AddEvaluationFinaleDto;
 import fr.Eval_fullstack.dto.response.EvaluationFinaleDto;
 import fr.Eval_fullstack.entity.EvaluationFinaleEntity;
+import fr.Eval_fullstack.entity.RestaurantEntity;
 
 public class EvaluationFinaleConverter {
 
@@ -19,7 +20,7 @@ public class EvaluationFinaleConverter {
         return EvaluationFinaleEntity.builder().id(dtoEvaluationFinale.getId()).note(dtoEvaluationFinale.getNote()).nom(dtoEvaluationFinale.getNom()).description(dtoEvaluationFinale.getDescription()).build();
     }
 
-    public static EvaluationFinaleEntity addDtoEvaluationFinaleToEntity(AddEvaluationFinaleDto dtoEvaluationFinale){
-        return EvaluationFinaleEntity.builder().note(dtoEvaluationFinale.getNote()).nom(dtoEvaluationFinale.getNom()).description(dtoEvaluationFinale.getDescription()).build();
+    public static EvaluationFinaleEntity addDtoEvaluationFinaleToEntity(AddEvaluationFinaleDto dtoEvaluationFinale, RestaurantEntity restaurantEntity){
+        return EvaluationFinaleEntity.builder().note(dtoEvaluationFinale.getNote()).nom(dtoEvaluationFinale.getNom()).restaurant(restaurantEntity).description(dtoEvaluationFinale.getDescription()).build();
     }
 }

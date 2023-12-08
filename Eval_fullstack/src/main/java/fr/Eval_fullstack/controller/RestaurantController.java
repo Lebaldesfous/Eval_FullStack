@@ -44,11 +44,17 @@ public class RestaurantController {
     @PutMapping(value = "/restaurants/{id}", produces = "application/json", consumes = "application/json")
     public RestaurantDto updateRestaurant(@Valid @PathVariable("id") Integer id, @Valid @RequestBody RestaurantDto restaurantDto) {
         RestaurantDto tmp = RestaurantConverteur.entityRestaurantToDto(restaurantService.getRestaurant(id));
-        tmp.setNom(restaurantDto.getNom());
-        tmp.setAdresse(restaurantDto.getAdresse());
-        tmp.setMoyenne(restaurantDto.getMoyenne());
-        tmp.setEvaluations(restaurantDto.getEvaluations());
+        if(restaurantDto.getNom() != null)
+            tmp.setNom(restaurantDto.getNom());
+        if(restaurantDto.getAdresse() != null)
+            tmp.setAdresse(restaurantDto.getAdresse());
+        if(restaurantDto.getMoyenne()>0 || restaurantDto.getMoyenne()<5)
+            tmp.setMoyenne(restaurantDto.getMoyenne());
+        if(restaurantDto.getEvaluations() != null)
+            tmp.setEvaluations(restaurantDto.getEvaluations());
+
         tmp.setEvaluationFinale(restaurantDto.getEvaluationFinale());
+
 
         return RestaurantConverteur.entityRestaurantToDto(restaurantService.updateRestaurant(RestaurantConverteur.dtoRestaurantToEntity(tmp)));
 

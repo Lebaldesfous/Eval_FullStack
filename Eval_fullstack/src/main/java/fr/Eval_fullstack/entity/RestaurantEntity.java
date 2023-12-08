@@ -1,5 +1,6 @@
 package fr.Eval_fullstack.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,9 +29,20 @@ public class RestaurantEntity {
     private Float moyenne;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<EvaluationEntity> evaluations;
 
     @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private EvaluationFinaleEntity evaluationFinale;
+
+    @ManyToMany
+    @JoinTable(
+        name = "tag_in_restaurant",
+        joinColumns = @JoinColumn(name = "restaurant_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    @JsonManagedReference
+    private List<TagEntity> tags;
 
 }

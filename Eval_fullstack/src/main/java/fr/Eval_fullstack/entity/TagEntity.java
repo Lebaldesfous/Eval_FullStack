@@ -4,14 +4,16 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "evaluationFinale")
+@Table(name = "tag")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Builder
-public class EvaluationFinaleEntity {
+public class TagEntity {
 
     @Id
     @GeneratedValue
@@ -20,14 +22,7 @@ public class EvaluationFinaleEntity {
     @Column(name = "nom", columnDefinition = "VARCHAR(90)", nullable = false)
     private String nom;
 
-    @Column(name="note" ,  nullable = false)
-    private Integer note;
-
-    @Column(name="description" , columnDefinition = "TEXT", nullable = false)
-    private String description;
-
-    @OneToOne
+    @ManyToMany
     @JsonBackReference
-    private RestaurantEntity restaurant;
-
+    private List<RestaurantEntity> restaurants;
 }

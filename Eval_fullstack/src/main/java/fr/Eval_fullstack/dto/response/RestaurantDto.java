@@ -36,6 +36,6 @@ public class RestaurantDto {
     private List<String> illustrations;
 
     @JsonProperty("tags")
-    private List<String> tags;
+    private List<TagDto> tags;
 
 }

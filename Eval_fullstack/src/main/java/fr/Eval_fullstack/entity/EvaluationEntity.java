@@ -1,7 +1,10 @@
 package fr.Eval_fullstack.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "evaluation")
@@ -26,13 +29,14 @@ public class EvaluationEntity {
     private String commentaire;
 
     @ManyToOne
+    @JsonBackReference
     private RestaurantEntity restaurant;
 
     @Column(name="dateCreation" , columnDefinition = "DATE", nullable = false)
-    private String dateCreation;
+    private Date dateCreation;
 
 
     @Column(name="dateModification" , columnDefinition = "DATE", nullable = false)
-    private String dateModification;
+    private Date dateModification;
 
 }
