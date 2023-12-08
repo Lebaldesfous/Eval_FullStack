@@ -14,4 +14,8 @@ public class TagService {
     private final TagRepository tagRepository;
 
 
+    public List<TagEntity> getTags() {
+        return tagRepository.findAll();
+    }
+
 }

@@ -1,0 +1,20 @@
+<a href="restaurants/add">Ajouter un nouveau restaurant</a>
+<table>
+  <thead>
+    <th>Nom</th>
+    <th>Adresse</th>
+    <th>Note</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let restaurant of restaurants" appRestaurant="{{restaurant.moyenne}}">
+      <td >{{restaurant.nom}}</td>
+      <td>{{restaurant.adresse}}</td>
+      <td>{{restaurant.moyenne}}</td>
+      <td><a href="restaurants/{{restaurant.id}}">Détails</a></td>
+    </tr>
+  </tbody>
+  <tbody>
+
+  </tbody>
+</table>

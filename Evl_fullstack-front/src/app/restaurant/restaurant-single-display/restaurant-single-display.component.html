@@ -1,0 +1,35 @@
+<h1> {{restaurant.nom}} </h1>
+
+<div>
+    <h3> Adresse :</h3>
+    <p> {{restaurant.adresse}} </p>
+</div>
+
+<div *ngIf="restaurant.illustration!==''">
+    <img src="{{restaurant.illustration}}" alt="image du restaurant">
+</div>
+
+<div>
+    <h3>Evaluations : </h3>
+
+    <table>
+        <tr>
+            <th>nom</th>
+            <th>Commentaire</th>
+            <th>Note</th>
+            <th>Photos</th>
+            <th>Supprimer</th>
+        </tr>
+        <tr *ngFor="let evaluation of restaurant.evaluations">
+            <td>{{evaluation.nom}}</td>
+            <td>{{evaluation.commentaire}}</td>
+            <td>{{evaluation.note}}</td>
+            <td>
+                <img *ngFor="let photo of evaluation.photos" src="{{photo}}" alt="photo de l'évaluation">
+            </td>
+            <td>
+                <button (click)="supprimerEvaluation(evaluation)">Supprimer</button>
+            </td>
+        </tr>
+    </table>
+</div>

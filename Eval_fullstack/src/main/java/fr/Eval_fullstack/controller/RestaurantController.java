@@ -2,9 +2,12 @@ package fr.Eval_fullstack.controller;
 
 
 import fr.Eval_fullstack.converter.RestaurantConverteur;
+import fr.Eval_fullstack.converter.TagConverter;
 import fr.Eval_fullstack.dto.request.AddRestaurantDto;
 import fr.Eval_fullstack.dto.response.RestaurantDto;
+import fr.Eval_fullstack.dto.response.TagDto;
 import fr.Eval_fullstack.service.RestaurantService;
+import fr.Eval_fullstack.service.TagService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,7 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+    private final TagService tagService;
 
     @GetMapping(value = "/restaurants", produces = "application/json")
     public List<RestaurantDto> getRestaurants() {
@@ -58,6 +62,11 @@ public class RestaurantController {
 
         return RestaurantConverteur.entityRestaurantToDto(restaurantService.updateRestaurant(RestaurantConverteur.dtoRestaurantToEntity(tmp)));
 
+    }
+
+    @GetMapping(value = "tags", produces = "application/json")
+    public List<TagDto> getTags() {
+        return TagConverter.entityToDto(tagService.getTags());
     }
 
 }

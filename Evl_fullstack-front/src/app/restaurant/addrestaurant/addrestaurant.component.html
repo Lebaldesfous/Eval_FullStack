@@ -1,0 +1,20 @@
+<h1>Ajouter un restaurant</h1>
+
+<form #formAddRestaurant="ngForm" (ngSubmit)="addLivre(formAddRestaurant)">
+
+  <label for="nom">Nom </label>
+  <input type="text" name="nom" [(ngModel)]="restaurant.nom">
+
+  <label for="adresse">Adresse </label>
+  <input type="text" name="adresse" [(ngModel)]="restaurant.adresse">
+
+
+  <div *ngFor="let type of types">
+    <input type="checkbox" name="{{type.id}}"/>
+    <label for="{{type.id}}">{{type.nom}} </label>
+  </div>
+
+  <button type="submit">Ajouter</button>
+
+</form>
+

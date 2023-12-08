@@ -41,7 +41,7 @@ public class RestaurantConverteur {
        return RestaurantEntity.builder()
                .nom(addRestaurantDto.getNom())
                .adresse(addRestaurantDto.getAdresse())
-               .moyenne(0.0f).tags(TagConverter.dtoToEntity(addRestaurantDto.getTags()))
+               .moyenne(-1.0f).tags(TagConverter.dtoToEntity(addRestaurantDto.getTags()))
                .build();
    }
 
