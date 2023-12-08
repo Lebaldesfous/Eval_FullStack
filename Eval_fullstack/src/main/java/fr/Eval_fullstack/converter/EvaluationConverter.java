@@ -42,7 +42,7 @@ public class EvaluationConverter {
         }
         l.forEach(evaluationDto -> {
             lEntity.add(dtoEvaluationToEntity(evaluationDto));
-        });t
+        });
         return lEntity;
     }
 
